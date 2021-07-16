@@ -9,8 +9,6 @@
 <body> 
 <div class="wrapper">
   <div class="side_bar">
-    <p><a href="login.php">ログイン</a></p>
-    <p><a href="create.php">新規ユーザー登録</a></p>
   </div>
   <div class="main">
     <h1>Simple BBS</h1>
@@ -18,7 +16,7 @@
       require('dbconnect.php');
       ?>
 <article>
-      test
+      編集確認画面
 </article>
   </div>
 </div>

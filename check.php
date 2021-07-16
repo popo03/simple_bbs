@@ -1,7 +1,3 @@
-<?php
-require('dbconnect.php');
-
-?>
 <!doctype html>
 <html lang="ja">
 <head>
@@ -28,8 +24,7 @@ require('dbconnect.php');
           <input type="password" name="password" value="">
         </dd>
     </dl>
-    <input type="submit" value="入力内容を確認する">
-    <a href="index.php">戻る</a>
+    <a href="#">書き直す</a> | <input type="submit" value="登録する">
   </form>
 </div>
 </body>

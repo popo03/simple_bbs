@@ -9,8 +9,9 @@
 <body> 
 <div class="wrapper">
   <div class="side_bar">
-    <p><a href="login.php">ログイン</a></p>
-    <p><a href="create.php">新規ユーザー登録</a></p>
+    <p><a href="#">ユーザー名</a></p>
+    <p><a href="input.html">新規投稿</a></p>
+    <p><a href="#">ログアウト</a></p>
   </div>
   <div class="main">
     <h1>Simple BBS</h1>

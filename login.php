@@ -8,8 +8,13 @@
 
 <body> 
 <div class="wrapper">
-ログイン画面
-<a href="index.php">戻る</a>
+  <div class="side_bar">
+
+  </div>
+  <div class="main">
+    ログイン画面
+  </div>
+    <a href="index.php">戻る</a>
 </div>
 </body>
 </html>

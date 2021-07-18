@@ -16,10 +16,18 @@
     <h1>Simple BBS</h1>
       <?php
       require('dbconnect.php');
+
+      $posts = $db->prepare('SELECT * FROM posts ORDER BY id DESC');
+      $posts->bindParam(1, $start, PDO::PARAM_INT);
+      $posts->execute();
       ?>
-<article>
-      test
-</article>
+    <article>
+      <?php while ($post = $posts->fetch()): ?>
+        <p><a href="#"><?php print(mb_substr($post['message'], 0, 50)); ?></a></p>
+        <time><?php print($post['created_at']); ?></time>
+        <hr>
+      <?php endwhile; ?>
+    </article>
   </div>
 </div>
 </body>

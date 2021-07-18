@@ -7,9 +7,13 @@
 </head>
 
 <body> 
-<div>
+<div class="wrapper">
+  <div class="side_bar">
 
-削除しました
+  </div>
+  <div class="main">
+    削除しました
+  </div>
 </div>
 </body>
 </html>

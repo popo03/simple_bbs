@@ -7,10 +7,15 @@
 </head>
 
 <body> 
-<div id="content">
-  <p>新規ユーザー登録画面</p>
-  <p>ユーザー登録が完了しました</p>
-  <p><a href="#">ログインする</a></p>
+<div class="wrapper" id="content">
+  <div class="side_bar">
+
+  </div>
+  <div class="main">
+    <p>新規ユーザー登録画面</p>
+    <p>ユーザー登録が完了しました</p>
+    <p><a href="#">ログインする</a></p>
+  </div>
 </div>
 </body>
 </html>

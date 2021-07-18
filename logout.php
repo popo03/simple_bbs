@@ -7,9 +7,14 @@
 </head>
 
 <body> 
-<div>
-  <p>ログアウトしました</p>
-  <p><a href="index.php">トップページへ</a></p>
+<div class="wrapper">
+  <div class="side_bar">
+
+  </div>
+  <div class="main">
+    <p>ログアウトしました</p>
+    <p><a href="index.php">トップページへ</a></p>
+  </div>
 </div>
 </body>
 </html>

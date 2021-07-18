@@ -1,4 +1,5 @@
 <?php
+session_start();
 require('dbconnect.php');
 
 if (!empty($_POST)) {
@@ -14,12 +15,28 @@ if (!empty($_POST)) {
   if ($_POST['password'] === '') {
     $error['password'] = 'blank';
   }
+
+  //アカウントの重複チェック
+  if (empty($error)) {
+    $member = $db->prepare('SELECT COUNT(*) AS cnt FROM users WHERE email=?');
+    $member->execute(array($_POST['email']));
+    $record = $member->fetch();
+    if ($record['cnt'] > 0) {
+      $error['email'] = 'duplicate';
+    }
+  }
   
   if (empty($error)) {
+    $_SESSION['join'] = $_POST;
     header('Location: check.php');
     exit();
   }
 }
+
+if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
+  $_POST = $_SESSION['join'];
+}
+
 ?>
 <!doctype html>
 <html lang="ja">
@@ -50,21 +67,25 @@ if (!empty($_POST)) {
             <input type="email" name="email" value="<?php print(htmlspecialchars($_POST['email'], ENT_QUOTES)); ?>">
             <?php if ($error['email'] === 'blank'): ?>
               <p>* メールアドレスを入力して下さい</p>
-            <?php endif ?>
+            <?php endif; ?>
+            <?php if ($error['email'] === 'duplicate'): ?>
+              <p>* 指定されたメールアドレスは、既に登録されています</p>
+            <?php endif; ?>
           </dd>
         <dt>パスワード</dt>
           <dd>
             <input type="password" name="password" value="<?php print(htmlspecialchars($_POST['password'], ENT_QUOTES)); ?>">
             <?php if ($error['password'] === 'length'): ?>
              <p>* パスワードは4文字以上で入力して下さい</p>
-            <?php endif ?>
+            <?php endif; ?>
             <?php if ($error['password'] === 'blank'): ?>
               <p>* パスワードを入力して下さい</p>
-            <?php endif ?>
+            <?php endif; ?>
           </dd>
       </dl>
       <input type="submit" value="入力内容を確認する">
-      <a href="index.php">戻る</a>
+      |
+      <a href="index.php">トップページに戻る</a>
     </form>
   </div>
 </div>

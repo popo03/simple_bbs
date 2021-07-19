@@ -1,4 +1,5 @@
 <?php
+session_start();
 require('dbconnect.php');
 
 if (!empty($_POST)) {
@@ -18,6 +19,9 @@ if (!empty($_POST)) {
     $user = $login->fetch();
 
     if ($user) {
+      $_SESSION['id'] = $user['id'];
+      $_SESSION['time'] = time();
+
       header('Location: room.php');
       exit();
     } else {

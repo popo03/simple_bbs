@@ -33,15 +33,36 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
       <?php
       require('dbconnect.php');
 
-      $posts = $db->query('SELECT u.name, p.* FROM users u, posts p WHERE u.id=p.user_id ORDER BY p.created_at DESC');
+      if (isset($_REQUEST['page']) && is_numeric($_REQUEST['page'])) {
+        $page = $_REQUEST['page'];
+      } else {
+        $page = 1;
+      }
+      $start = 5 * ($page - 1);
+
+      $posts = $db->prepare('SELECT u.name, p.* FROM users u, posts p WHERE u.id=p.user_id ORDER BY p.created_at DESC LIMIT ?, 5');
+      $posts->bindParam(1, $start, PDO::PARAM_INT);
+      $posts->execute();
       ?>
     <article>
       <?php while ($post = $posts->fetch()): ?>
-        <p><a href="#"><?php print(mb_substr($post['message'], 0, 50)); ?></a></p>
-        <p>投稿者：<?php print($post['name']); ?>さん</p>
-        <time><?php print($post['created_at']); ?></time>
+        <p><a href="comment.php?id=<?php print($post['id']); ?>"><?php print(mb_substr($post['message'], 0, 50)); ?></a></p>
+        <p>投稿者：<?php print($post['name']); ?>さん , <?php print($post['created_at']); ?></p>
         <hr>
       <?php endwhile; ?>
+
+      <?php if ($page >= 2): ?>
+        <a href="room.php?page=<?php print($page-1); ?>"><?php print($page-1); ?>ページ目へ</a>
+      <?php endif; ?>
+      |
+      <?php
+        $counts = $db->query('SELECT COUNT(*) as cnt FROM posts');
+        $count = $counts->fetch();
+        $max_page = ceil($count['cnt'] / 5);
+        if ($page < $max_page):
+      ?>
+        <a href="room.php?page=<?php print($page+1); ?>"><?php print($page+1); ?>ページ目へ</a>
+      <?php endif; ?>
     </article>
   </div>
 </div>

@@ -26,7 +26,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
   <div class="side_bar">
     <p><a href="#"><?php print(htmlspecialchars($user['name'], ENT_QUOTES)); ?>さん</a></p>
     <p><a href="input.php">新規投稿</a></p>
-    <p><a href="#">ログアウト</a></p>
+    <p><a href="logout.php">ログアウト</a></p>
   </div>
   <div class="main">
     <h1>Simple BBS</h1>

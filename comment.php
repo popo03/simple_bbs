@@ -12,6 +12,21 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
   header('Location: login.php');
   exit();
 }
+
+if (!empty($_POST)) {
+  if ($_POST['comment'] !== '') {
+    $comment = $db->prepare('INSERT INTO talk_rooms SET user_id=?, message_id=?, comment=?, created_at=NOW()');
+    $comment->execute(array(
+      $user['id'],
+      $_POST['message_id'],
+      $_POST['comment']
+    ));
+
+    header('Location: room.php');
+    exit();
+  }
+}
+
 ?>
 <!doctype html>
 <html lang="ja">
@@ -36,20 +51,40 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         exit();
       }
 
-      $posts = $db->prepare('SELECT * FROM posts WHERE id=?');
+      $posts = $db->prepare('SELECT u.name, p.* FROM users u, posts p WHERE u.id=p.user_id AND p.id=?');
       $posts->execute(array($id));
       $post = $posts->fetch();
+
+
+
+      $messages = $db->prepare('SELECT u.name, t.* FROM users u, posts p, talk_rooms t WHERE u.id=t.user_id AND p.id=t.message_id ORDER BY t.created_at DESC');
+      $messages->bindParam(1, $start, PDO::PARAM_INT);
+      $messages->execute();
       ?>
     <article>
       <pre><?php print($post['message']); ?></pre>
-      <p>投稿者：<?php print($post['name']); ?>, <?php print($post['created_at']); ?></p>
+      <p>投稿者：<?php print($post['name']); ?>さん, <?php print($post['created_at']); ?></p>
       <hr>
+      <hr>
+      <div style="width:100%; height:300px; overflow:auto">
+        <?php while ($message = $messages->fetch()): ?>
+         <?php if ($message['message_id'] === $_REQUEST['id']): ?>
+          <p>
+            <?php print($message['comment']); ?> ,
+             投稿者：<?php print($message['name']); ?>さん, <?php print($message['created_at']); ?>
+         </p>
+         <hr>
+         <?php endif; ?>
+       <?php endwhile; ?>
+      </div>
 
-
-      <textarea name='message' cols="100" rows="5"></textarea>
-      <p><input type="submit" value="送信">
-      |
-      <a href="room.php">戻る</a></p>
+      <form action="" method="post">
+        <textarea name='comment' cols="100" rows="5" placeholder="メッセージを記載して下さい"></textarea>
+        <input type="hidden" name="message_id" value="<?php print(htmlspecialchars($_REQUEST['id'], ENT_QUOTES)); ?>">
+        <p><button type="submit">送信</button>
+        |
+        <a href="room.php">戻る</a></p>
+    </form>
     </article>
   </div>
 </div>

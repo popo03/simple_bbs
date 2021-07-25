@@ -42,7 +42,7 @@ if (!empty($_POST)) {
 <body> 
 <div class="wrapper">
   <div class="side_bar">
-
+    <p><a href="create.php">新規ユーザー登録</a></p>
   </div>
   <div class="main">
     <p><h2>ログイン画面</h2></p>
@@ -67,7 +67,7 @@ if (!empty($_POST)) {
         </dd>
       </dl>
     <input type="submit" value="ログインする">
-    <a href="index.php">戻る</a>
+    <a href="index.php">トップページに戻る</a>
   </div>
 </div>
 </body>

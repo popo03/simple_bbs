@@ -49,7 +49,7 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 <body>
 <div class="wrapper">
   <div class="side_bar">
-
+    <p><a href="login.php">ログイン</a></p>
   </div>
   <div class="main" id="content">
     <p>新規ユーザー登録画面</p>

@@ -44,9 +44,9 @@ if (!empty($_POST)) {
     <h1>Simple BBS</h1>
     <form action="" method="post">
       <textarea name='message' cols="50" rows="10" placeholder="メッセージを記載して下さい"></textarea><br>
-      <a href="room.php">戻る</a>
-      |
       <button type="submit">投稿する</button>
+      |
+      <a href="room.php">トップページに戻る</a>
     </form>
   </div>
 </div>

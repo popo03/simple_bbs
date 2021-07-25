@@ -30,7 +30,7 @@
       ?>
     <article>
       <?php while ($post = $posts->fetch()): ?>
-        <p><a href="#"><?php print(mb_substr($post['message'], 0, 50)); ?></a></p>
+        <p><a href="login.php"><?php print(mb_substr($post['message'], 0, 50)); ?></a></p>
         <time><?php print($post['created_at']); ?></time>
         <hr>
       <?php endwhile; ?>

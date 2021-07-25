@@ -47,7 +47,12 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     <article>
       <?php while ($post = $posts->fetch()): ?>
         <p><a href="comment.php?id=<?php print($post['id']); ?>"><?php print(mb_substr($post['message'], 0, 50)); ?></a></p>
-        <p>投稿者：<?php print($post['name']); ?>さん , <?php print($post['created_at']); ?></p>
+        <p>
+          投稿者：<?php print($post['name']); ?>さん , <?php print($post['created_at']); ?>
+          <?php if ($_SESSION['id'] == $post['user_id']): ?>
+          [<a href="delete.php?id=<?php print(htmlspecialchars($post['id'])); ?>">削除</a>]
+          <?php endif; ?>
+        </p>
         <hr>
       <?php endwhile; ?>
 

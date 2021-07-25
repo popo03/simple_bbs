@@ -1,19 +1,27 @@
-<!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="style.css">
-<title>simple_bbs</title>
-</head>
+<?php
+session_start();
+require('dbconnect.php');
 
-<body> 
-<div class="wrapper">
-  <div class="side_bar">
+if (isset($_SESSION['id'])) {
+  $id = $_REQUEST['id'];
 
-  </div>
-  <div class="main">
-    削除しました
-  </div>
-</div>
-</body>
-</html>
+  $messages = $db->prepare('SELECT * FROM posts WHERE id=?');
+  $messages->execute(array($id));
+  $message = $messages->fetch();
+
+  $posts = $db->prepare('SELECT * FROM talk_rooms WHERE message_id=?');
+  $posts->execute(array($id));
+  $post = $posts->fetch();
+
+  if ($message['user_id'] == $_SESSION['id']) {
+    $del = $db->prepare('DELETE FROM posts WHERE id=?');
+    $del->execute(array($id));
+
+    $dele = $db->prepare('DELETE FROM talk_rooms WHERE message_id=?');
+    $dele->execute(array($id));
+  }
+}
+
+header('Location: room.php');
+exit();
+?>

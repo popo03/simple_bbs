@@ -14,7 +14,7 @@
   <div class="main">
     <p>新規ユーザー登録画面</p>
     <p>ユーザー登録が完了しました</p>
-    <p><a href="#">ログインする</a></p>
+    <p><a href="login.php">ログイン画面へ</a></p>
   </div>
 </div>
 </body>

@@ -1,3 +1,49 @@
+<?php
+session_start();
+require('dbconnect.php');
+
+if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+  $_SESSION['time'] = time();
+
+  $users = $db->prepare('SELECT * FROM users WHERE id=?');
+  $users->execute(array($_SESSION['id']));
+  $user = $users->fetch();
+} else {
+  header('Location: login.php');
+  exit();
+}
+
+if (!empty($_POST)) {
+  if ($_POST['name'] ==='') {
+    $error['name'] = 'blank';
+  }
+  if ($_POST['email'] === '') {
+    $error['email'] = 'blank';
+  }
+  if (strlen($_POST['password']) < 4) {
+    $error['password'] = 'length';
+  }
+  if ($_POST['password'] === '') {
+    $error['password'] = 'blank';
+  }
+
+
+  if (empty($error)) {
+    $_SESSION['join'] = $_POST;
+    header('Location: update_do.php');
+    exit();
+  }
+}
+
+if (isset($_REQUEST['id']) && is_numeric($_REQUEST['id'])) {
+  $id = $_REQUEST['id'];
+
+  $users = $db->prepare('SELECT * FROM users WHERE id=?');
+  $users->execute(array($id));
+  $user = $users->fetch();
+}
+
+?>
 <!doctype html>
 <html lang="ja">
 <head>
@@ -6,18 +52,45 @@
 <title>simple_bbs</title>
 </head>
 
-<body> 
+<body>
 <div class="wrapper">
   <div class="side_bar">
+    
   </div>
-  <div class="main">
-    <h1>Simple BBS</h1>
-      <?php
-      require('dbconnect.php');
-      ?>
-<article>
-      編集画面
-</article>
+  <div class="main" id="content">
+    <p>ユーザー編集画面</p>
+    <form action="" method="post">
+      <input type="hidden" name="id" value="<?php print($id); ?>">
+      <dl>
+       <dt>名前</dt>
+         <dd>
+            <input type="text" name="name" value="<?php print($user['name']); ?>">
+            <?php if ($error['name'] === 'blank'): ?>
+              <p>*名前を入力して下さい</p>
+            <?php endif; ?>
+          </dd>
+        <dt>メールアドレス</dt>
+          <dd>
+            <input type="email" name="email" value="<?php print($user['email']); ?>">
+            <?php if ($error['email'] === 'blank'): ?>
+              <p>*メールアドレスを入力して下さい</p>
+            <?php endif; ?>
+          </dd>
+        <dt>新しいパスワード</dt>
+          <dd>
+            <input type="password" name="password" value="">
+            <?php if ($error['password'] === 'length'): ?>
+              <p>*パスワードは4文字以上で入力して下さい</p>
+            <?php endif; ?>
+            <?php if ($error['password'] === 'blank'): ?>
+              <p>*パスワードを入力して下さい</p>
+            <?php endif; ?>
+          </dd>
+      </dl>
+      <input type="submit" value="入力内容を確認する">
+      |
+      <a href="room.php">戻る</a>
+    </form>
   </div>
 </div>
 </body>

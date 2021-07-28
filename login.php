@@ -35,39 +35,54 @@ if (!empty($_POST)) {
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/sanitize.css">
+<link rel="stylesheet" href="css/style.css">
 <title>simple_bbs</title>
 </head>
 
 <body> 
 <div class="wrapper">
   <div class="side_bar">
-    <p><a href="create.php">新規ユーザー登録</a></p>
+    <div class="category">
+      <p><a href="create.php">新規ユーザー登録画面へ</a></p>
+      <p><a href="index.php">トップページに戻る</a></p>
+    </div>
   </div>
   <div class="main">
-    <p><h2>ログイン画面</h2></p>
-    <form action="" method="post">
+    <h1>Simple BBS</h1>
+    <hr>
+    <hr>
+
+    <div class="content">
+      <h2>ログイン画面</h2>
+      <form action="" method="post">
       <dl>
-        <dt>メールアドレス</dt>
-        <dd>
-          <input type="text" name="email" value="<?php print(htmlspecialchars($_POST['email'], ENT_QUOTES)); ?>">
-          <?php if ($error['email'] === 'blank'): ?>
-            <p>*メールアドレスを入力して下さい</p>
-          <?php endif; ?>
-        </dd>
-        <dt>パスワード</dt>
-        <dd>
-          <input type="password" name="password" value="<?php print(htmlspecialchars($_POST['password'], ENT_QUOTES)); ?>">
-          <?php if ($error['password'] === 'blank'): ?>
-            <p>*パスワードを入力して下さい</p>
-          <?php endif; ?>
-          <?php if ($error['login'] === 'failed'): ?>
-            <p>*ログインに失敗しました。正しく入力して下さい</p>
-          <?php endif; ?>
-        </dd>
+        <div class="content_email">
+          <dt>メールアドレス</dt>
+          <dd>
+            <input type="text" name="email" value="<?php print(htmlspecialchars($_POST['email'], ENT_QUOTES)); ?>">
+            <?php if ($error['email'] === 'blank'): ?>
+              <p>*メールアドレスを入力して下さい</p>
+            <?php endif; ?>
+          </dd>
+        </div>
+        <div class="content_pass">
+          <dt>パスワード</dt>
+          <dd>
+            <input type="password" name="password" value="<?php print(htmlspecialchars($_POST['password'], ENT_QUOTES)); ?>">
+            <?php if ($error['password'] === 'blank'): ?>
+              <p>*パスワードを入力して下さい</p>
+            <?php endif; ?>
+            <?php if ($error['login'] === 'failed'): ?>
+              <p>*ログインに失敗しました。正しく入力して下さい</p>
+            <?php endif; ?>
+          </dd>
+        </div>
       </dl>
-    <input type="submit" value="ログインする">
-    <a href="index.php">トップページに戻る</a>
+      <div class="content_button">
+        <input type="submit" value="login">
+      </div>
+    </div>
   </div>
 </div>
 </body>

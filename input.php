@@ -30,24 +30,31 @@ if (!empty($_POST)) {
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/sanitize.css">
+<link rel="stylesheet" href="css/style.css">
 <title>simple_bbs</title>
 </head>
 
 <body> 
 <div class="wrapper">
   <div class="side_bar">
-    <h4>新規投稿画面</h4>
-    <p><?php print(htmlspecialchars($user['name'], ENT_QUOTES)); ?>さん</p>
+    <div class="category">
+      <p><?php print(htmlspecialchars($user['name'], ENT_QUOTES)); ?>さん</p>
+    </div>
   </div>
   <div class="main">
     <h1>Simple BBS</h1>
-    <form action="" method="post">
-      <textarea name='message' cols="50" rows="10" placeholder="メッセージを記載して下さい"></textarea><br>
+    <hr>
+    <hr>
+    <div class="content_input">
+      <h2>新規投稿画面</h2>
+      <form action="" method="post">
+      <textarea name='message' cols="70" rows="10" placeholder="メッセージを記載して下さい"></textarea><br>
       <button type="submit">投稿する</button>
       |
       <a href="room.php">トップページに戻る</a>
-    </form>
+      </form>
+    </div>
   </div>
 </div>
 </body>

@@ -2,18 +2,23 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/sanitize.css">
+<link rel="stylesheet" href="css/style.css">
 <title>simple_bbs</title>
 </head>
 
 <body> 
 <div class="wrapper">
   <div class="side_bar">
-    <p><a href="login.php">ログイン</a></p>
-    <p><a href="create.php">新規ユーザー登録</a></p>
+    <div class="category">
+      <p><a href="login.php">ログイン</a></p>
+      <p><a href="create.php">新規ユーザー登録</a></p>
+    </div>
   </div>
   <div class="main">
     <h1>Simple BBS</h1>
+    <hr>
+    <hr>
       <?php
       require('dbconnect.php');
 
@@ -29,11 +34,13 @@
       $posts->execute();
       ?>
     <article>
+      <div class="show">
       <?php while ($post = $posts->fetch()): ?>
         <p><a href="login.php"><?php print(mb_substr($post['message'], 0, 50)); ?></a></p>
         <time><?php print($post['created_at']); ?></time>
         <hr>
       <?php endwhile; ?>
+      </div>
       
       <?php if ($page >= 2): ?>
         <a href="index.php?page=<?php print($page-1); ?>"><?php print($page-1); ?>ページへ</a>

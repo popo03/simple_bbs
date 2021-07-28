@@ -32,14 +32,17 @@ if (!empty($_POST)) {
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/sanitize.css">
+<link rel="stylesheet" href="css/style.css">
 <title>simple_bbs</title>
 </head>
 
 <body> 
 <div class="wrapper">
   <div class="side_bar">
-    <?php print(htmlspecialchars($user['name'], ENT_QUOTES)); ?>さん
+      <div class="category">
+      <?php print(htmlspecialchars($user['name'], ENT_QUOTES)); ?>さん
+      </div>
   </div>
   <div class="main">
     <h1>Simple BBS</h1>
@@ -62,7 +65,8 @@ if (!empty($_POST)) {
       $messages->execute();
       ?>
     <article>
-      <pre><?php print($post['message']); ?></pre>
+      <div class="show">
+      <p><?php print($post['message']); ?></p>
       <p>投稿者：<?php print($post['name']); ?>さん, <?php print($post['created_at']); ?></p>
       <hr>
       <hr>
@@ -77,14 +81,17 @@ if (!empty($_POST)) {
          <?php endif; ?>
        <?php endwhile; ?>
       </div>
+      </div>
 
-      <form action="" method="post">
-        <textarea name='comment' cols="100" rows="5" placeholder="メッセージを記載して下さい"></textarea>
-        <input type="hidden" name="message_id" value="<?php print(htmlspecialchars($_REQUEST['id'], ENT_QUOTES)); ?>">
-        <p><button type="submit">送信</button>
-        |
-        <a href="room.php">戻る</a></p>
-    </form>
+      <div class="content_text">
+        <form action="" method="post">
+          <textarea name='comment' cols="100" rows="5" placeholder="メッセージを記載して下さい"></textarea>
+          <input type="hidden" name="message_id" value="<?php print(htmlspecialchars($_REQUEST['id'], ENT_QUOTES)); ?>">
+          <p><button type="submit">送信</button>
+          |
+          <a href="room.php">戻る</a></p>
+        </form>
+      </div>
     </article>
   </div>
 </div>

@@ -17,19 +17,24 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/sanitize.css">
+<link rel="stylesheet" href="css/style.css">
 <title>simple_bbs</title>
 </head>
 
 <body> 
 <div class="wrapper">
   <div class="side_bar">
-    <p><a href="update.php?id=<?php print($user['id']); ?>"><?php print(htmlspecialchars($user['name'], ENT_QUOTES)); ?>さん</a></p>
-    <p><a href="input.php">新規投稿</a></p>
-    <p><a href="logout.php">ログアウト</a></p>
+    <div class="category">
+      <p><a href="update.php?id=<?php print($user['id']); ?>"><?php print(htmlspecialchars($user['name'], ENT_QUOTES)); ?>さん</a></p>
+      <p><a href="input.php">新規投稿</a></p>
+      <p><a href="logout.php">ログアウト</a></p>
+    </div>
   </div>
   <div class="main">
     <h1>Simple BBS</h1>
+    <hr>
+    <hr>
       <?php
       require('dbconnect.php');
 
@@ -45,6 +50,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
       $posts->execute();
       ?>
     <article>
+      <div class="show">
       <?php while ($post = $posts->fetch()): ?>
         <p><a href="comment.php?id=<?php print($post['id']); ?>"><?php print(mb_substr($post['message'], 0, 50)); ?></a></p>
         <p>
@@ -55,6 +61,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         </p>
         <hr>
       <?php endwhile; ?>
+      </div>
 
       <?php if ($page >= 2): ?>
         <a href="room.php?page=<?php print($page-1); ?>"><?php print($page-1); ?>ページ目へ</a>
@@ -68,6 +75,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
       ?>
         <a href="room.php?page=<?php print($page+1); ?>"><?php print($page+1); ?>ページ目へ</a>
       <?php endif; ?>
+
     </article>
   </div>
 </div>

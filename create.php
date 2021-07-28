@@ -42,27 +42,39 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/sanitize.css">
+<link rel="stylesheet" href="css/style.css">
 <title>simple_bbs</title>
 </head>
 
 <body>
 <div class="wrapper">
   <div class="side_bar">
-    <p><a href="login.php">ログイン</a></p>
+    <div class="category">
+      <p><a href="login.php">ログイン画面へ</a></p>
+      <p><a href="index.php">トップページに戻る</a></p>
+    </div>
   </div>
   <div class="main" id="content">
-    <p>新規ユーザー登録画面</p>
-    <form action="" method="post">
+    <h1>Simple BBS</h1>
+    <hr>
+    <hr>
+    <div class="content">
+      <h2>新規ユーザー登録画面</h2>
+      <form action="" method="post">
       <dl>
-       <dt>名前</dt>
-         <dd>
+        <div class="content_name">
+          <dt>名前</dt>
+          <dd>
             <input type="text" name="name" value="<?php print(htmlspecialchars($_POST['name'], ENT_QUOTES)); ?>">
             <?php if ($error['name'] === 'blank'): ?>
               <p>* 名前を入力して下さい</p>
             <?php endif; ?>
           </dd>
-        <dt>メールアドレス</dt>
+        </div>
+
+        <div class="content_email">
+          <dt>メールアドレス</dt>
           <dd>
             <input type="email" name="email" value="<?php print(htmlspecialchars($_POST['email'], ENT_QUOTES)); ?>">
             <?php if ($error['email'] === 'blank'): ?>
@@ -72,7 +84,10 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
               <p>* 指定されたメールアドレスは、既に登録されています</p>
             <?php endif; ?>
           </dd>
-        <dt>パスワード</dt>
+        </div>
+
+        <div class="content_pass">
+          <dt>パスワード</dt>
           <dd>
             <input type="password" name="password" value="<?php print(htmlspecialchars($_POST['password'], ENT_QUOTES)); ?>">
             <?php if ($error['password'] === 'length'): ?>
@@ -82,11 +97,13 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
               <p>* パスワードを入力して下さい</p>
             <?php endif; ?>
           </dd>
+        </div>
       </dl>
-      <input type="submit" value="入力内容を確認する">
-      |
-      <a href="index.php">トップページに戻る</a>
+      <div class="content_button">
+        <input type="submit" value="入力内容を確認する">
+      </div>
     </form>
+    </div>
   </div>
 </div>
 </body>

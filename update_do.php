@@ -17,7 +17,8 @@ $statement->execute(array(
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/sanitize.css">
+<link rel="stylesheet" href="css/style.css">
 <title>simple_bbs</title>
 </head>
 
@@ -27,10 +28,14 @@ $statement->execute(array(
   </div>
   <div class="main">
     <h1>Simple BBS</h1>
+    <hr>
+    <hr>
+    <div class="content_input">
       <pre>
-        <p>ユーザー情報を変更しました</p>
+        <h2>ユーザー情報を変更しました</h2>
         <a href="room.php">トップページに戻る</a>
       </pre>
+    </div>
   </div>
 </div>
 </body>

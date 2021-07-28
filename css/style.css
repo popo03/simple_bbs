@@ -1,0 +1,103 @@
+.wrapper {
+  display: flex;
+}
+
+.side_bar {
+  width: 300px;
+  height: 100vh;
+  background-color: aqua;
+}
+
+.category {
+  margin: 20px 0 0 20px;
+  font-size: 18px;
+}
+
+.category p {
+  margin-top: 50px;
+}
+
+.main {
+  width: calc(100vw - 300px);
+  background-color: white;
+}
+
+.main h1 {
+  margin-left: 50px;
+}
+
+.content {
+  background-color: white;
+  width: 600px;
+  margin: 50px auto;
+  padding: 10px 30px 30px 30px;
+  border: 1px solid #d1d1d1;
+}
+
+.content_input {
+  background-color: white;
+  width: 600px;
+  margin: 50px auto;
+  padding: 10px 30px 30px 30px;
+}
+
+.content_name input {
+  border: none;
+  border-bottom: 1px solid #d1d1d1;
+  font-size: 1.1em;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.content_name p {
+  color: red;
+}
+
+.content_email input {
+  border: none;
+  border-bottom: 1px solid #d1d1d1;
+  font-size: 1.1em;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.content_email p {
+  color: red;
+}
+
+.content_pass input {
+  border: none;
+  border-bottom: 1px solid #d1d1d1;
+  font-size: 1.1em;
+  width: 100%;
+  padding: 8px;
+}
+
+.content_pass p {
+  color: red;
+}
+
+.content_button input{
+  width: 100%;
+  background-color: #2096f3;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  border: 0;
+  border-radius: 3px;
+  box-shadow: 0 0 5px rgba(0 , 0, 0, .4);
+}
+
+.show p {
+  margin-left: 10px;
+}
+
+.show time {
+  margin-left: 10px;
+}
+
+.content_text {
+  margin-left: 15px;
+}
